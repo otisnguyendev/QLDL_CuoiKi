@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\cuoiky\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|E:\\cuoiky\\quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|e:\\cuoiky\\quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmHoSo.cs",
+              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs",
+              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmHoSo.cs",
+              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs",
+              "RelativeToolTip": "QuanLyDaiLy\\frmHoSo.cs",
+              "ViewState": "AQIAAJQAAAAAAAAAAADwv3UAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T13:40:06.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmHoSo.cs [Design]",
+              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs",
+              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmHoSo.cs",
+              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs [Design]",
+              "RelativeToolTip": "QuanLyDaiLy\\frmHoSo.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T13:40:00.395Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
