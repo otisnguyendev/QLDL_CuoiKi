@@ -166,23 +166,9 @@ namespace QuanLyDaiLy
             tt.Show();
         }
 
-        private void quyChếTổChứcToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmQuyCheToChuc q = new frmQuyCheToChuc();
-            q.MdiParent = this;
-            q.Show();
-        }
-
         private void quyChếMặtHàngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmQuyDinhMatHang q = new frmQuyDinhMatHang();
-            q.MdiParent = this;
-            q.Show();
-        }
-
-        private void quyChếTiềnNợToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmQuyDinhTienNo q = new frmQuyDinhTienNo();
             q.MdiParent = this;
             q.Show();
         }

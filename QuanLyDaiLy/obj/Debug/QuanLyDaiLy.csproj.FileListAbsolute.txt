@@ -34,7 +34,6 @@ E:\cuoiky\QuanLyDaiLy\bin\Debug\System.Numerics.Vectors.xml
 E:\cuoiky\QuanLyDaiLy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\cuoiky\QuanLyDaiLy\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.csproj.AssemblyReference.cache
-E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmQuyDinhTienNo.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmChangePass.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmChiTietXuatHang.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmCongNo.resources
@@ -46,7 +45,6 @@ E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmMain.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmMatHang.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmPhieuThuTien.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmPhieuXuatHang.resources
-E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmQuyCheToChuc.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmQuyDinhMatHang.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.frmThongTinSP.resources
 E:\cuoiky\QuanLyDaiLy\obj\Debug\QuanLyDaiLy.Properties.Resources.resources

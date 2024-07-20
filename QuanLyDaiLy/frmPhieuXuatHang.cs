@@ -64,19 +64,19 @@ namespace QuanLyDaiLy
             string sqtChuyenDoiNgayThang;
             if (dtpNgayLP_PhieuXuat.Checked)
             {
-                strNgayThang = dtpNgayLP_PhieuXuat.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtpNgayLP_PX = dtpNgayLP_PhieuXuat.Value;
+                sqtChuyenDoiNgayThang = dtpNgayLP_PX.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
             try
             {
                 error.Exception_PhieuXuatHang(strMaPX, commnd, sqlConn.sqlCNN);
                 error.Exception_TongTienXuat(strTongTienXuat, commnd);
                 error.Exception_GhiChu(strGhiChu, commnd);
-                string sqlstr = "insert into PhieuXuatHang values(N'" + strMaPX + "',N'" + strMaHoSo + "',N'" + strTongTienXuat + "',N'" + sqtChuyenDoiNgayThang + "',N'" + strGhiChu + "')";
+                string sqlstr = "insert into PhieuXuatHang (MaPhieuXuat, MaHoSo, TongTienXuat, NgayLapPhieu, GhiChu) values(N'" + strMaPX + "',N'" + strMaHoSo + "',N'" + strTongTienXuat + "',N'" + sqtChuyenDoiNgayThang + "',N'" + strGhiChu + "')";
                 global.SQL_Database(sqlstr, sqlConn.sqlCNN);
             }
             catch
@@ -96,26 +96,84 @@ namespace QuanLyDaiLy
             string sqtChuyenDoiNgayThang;
             if (dtpNgayLP_PhieuXuat.Checked)
             {
-                strNgayThang = dtpNgayLP_PhieuXuat.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtpNgayLP_PX = dtpNgayLP_PhieuXuat.Value;
+                sqtChuyenDoiNgayThang = dtpNgayLP_PX.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
             try
             {
-                error.Exception_PhieuXuatHang_CN(strMaPX, commnd,sqlConn.sqlCNN);
+                error.Exception_PhieuXuatHang_CN(strMaPX, commnd, sqlConn.sqlCNN);
                 error.Exception_TongTienXuat(strTongTienXuat, commnd);
                 error.Exception_GhiChu(strGhiChu, commnd);
-                string sqlstr = "update PhieuXuatHang set MaHoSo = N'" + strMaHoSo + "',TongTienXuat=N'" + strTongTienXuat + "',NgayLapPhieu='" + sqtChuyenDoiNgayThang + "' ,GhiChu=N'" + strGhiChu + "'where MaPhieuXuat='" + strMaPX + "'";
-                global.SQL_Database(sqlstr, sqlConn.sqlCNN);
+
+                StringBuilder sqlBuilder = new StringBuilder("UPDATE PhieuXuatHang SET ");
+                List<string> setClauses = new List<string>();
+
+                if (!string.IsNullOrEmpty(strMaHoSo))
+                {
+                    setClauses.Add("MaHoSo = @MaHoSo");
+                }
+                if (!string.IsNullOrEmpty(strTongTienXuat))
+                {
+                    setClauses.Add("TongTienXuat = @TongTienXuat");
+                }
+                if (!string.IsNullOrEmpty(strGhiChu))
+                {
+                    setClauses.Add("GhiChu = @GhiChu");
+                }
+                if (dtpNgayLP_PhieuXuat.Checked)
+                {
+                    setClauses.Add("NgayLapPhieu = @NgayLapPhieu");
+                }
+
+                if (setClauses.Count > 0)
+                {
+                    sqlBuilder.Append(string.Join(", ", setClauses));
+                    sqlBuilder.Append(" WHERE MaPhieuXuat = @MaPhieuXuat");
+
+                    string sqlstr = sqlBuilder.ToString();
+
+                    using (MySqlConnection conn = new MySqlConnection("Server=localhost;Database=dbcuoiky;Uid=root;Pwd=123456;"))
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(sqlstr, conn))
+                        {
+                            if (!string.IsNullOrEmpty(strMaHoSo))
+                            {
+                                cmd.Parameters.AddWithValue("@MaHoSo", strMaHoSo);
+                            }
+                            if (!string.IsNullOrEmpty(strTongTienXuat))
+                            {
+                                cmd.Parameters.AddWithValue("@TongTienXuat", strTongTienXuat);
+                            }
+                            if (!string.IsNullOrEmpty(strGhiChu))
+                            {
+                                cmd.Parameters.AddWithValue("@GhiChu", strGhiChu);
+                            }
+                            if (dtpNgayLP_PhieuXuat.Checked)
+                            {
+                                cmd.Parameters.AddWithValue("@NgayLapPhieu", sqtChuyenDoiNgayThang);
+                            }
+                            cmd.Parameters.AddWithValue("@MaPhieuXuat", strMaPX);
+
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không có dữ liệu nào để cập nhật.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show(strMess.ThaoTacThatBai, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(strMess.ThaoTacThatBai + ": " + ex.Message, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

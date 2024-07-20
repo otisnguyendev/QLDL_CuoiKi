@@ -1,87 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\cuoiky\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|e:\\cuoiky\\quanlydaily\\frmphieuthutien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmphieuthutien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|e:\\cuoiky\\quanlydaily\\frmcongno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmcongno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|e:\\cuoiky\\quanlydaily\\frmcongno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmcongno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|e:\\cuoiky\\quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95692739-EE1E-4A2D-ADED-3551946EADCC}|QuanLyDaiLy\\QuanLyDaiLy.csproj|solutionrelative:quanlydaily\\frmhoso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 3,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmCongNo.cs",
-              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmCongNo.cs",
-              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmCongNo.cs",
-              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmCongNo.cs",
-              "RelativeToolTip": "QuanLyDaiLy\\frmCongNo.cs",
-              "ViewState": "AQIAAHMBAAAAAAAAAAAAABgBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T09:16:11.003Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmCongNo.cs [Design]",
-              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmCongNo.cs",
-              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmCongNo.cs",
-              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmCongNo.cs [Design]",
-              "RelativeToolTip": "QuanLyDaiLy\\frmCongNo.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T09:16:09.545Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmHoSo.cs",
-              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs",
-              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmHoSo.cs",
-              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmHoSo.cs",
-              "RelativeToolTip": "QuanLyDaiLy\\frmHoSo.cs",
-              "ViewState": "AQIAADkAAAAAAAAAAAAkwE8AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T09:09:23.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frmPhieuThuTien.cs",
-              "DocumentMoniker": "E:\\cuoiky\\QuanLyDaiLy\\frmPhieuThuTien.cs",
-              "RelativeDocumentMoniker": "QuanLyDaiLy\\frmPhieuThuTien.cs",
-              "ToolTip": "E:\\cuoiky\\QuanLyDaiLy\\frmPhieuThuTien.cs",
-              "RelativeToolTip": "QuanLyDaiLy\\frmPhieuThuTien.cs",
-              "ViewState": "AQIAAPEAAAAAAAAAAAAIwL8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T08:50:49.797Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
