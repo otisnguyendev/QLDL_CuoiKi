@@ -57,7 +57,7 @@ namespace QuanLyDaiLy
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+      private void button3_Click(object sender, EventArgs e)
         {
             string strMaHoSo = txtMaHS.Text.Trim();
             string strTenDL = txtTenDL.Text.Trim();
@@ -66,17 +66,17 @@ namespace QuanLyDaiLy
             string strDienThoai = txtDienThoai.Text.Trim();
             string strMail = txtDiaChiM.Text.Trim();
             string strTienNo = txtTienNo.Text.Trim();
-            string strNgayThang;
             int intXacNhan = 0;
+
             string sqtChuyenDoiNgayThang;
             if (dtpNgayTN.Checked)
             {
-                strNgayThang = dtpNgayTN.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtNgayTN = dtpNgayTN.Value;
+                sqtChuyenDoiNgayThang = dtNgayTN.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
 
             try
@@ -87,26 +87,28 @@ namespace QuanLyDaiLy
                 error.Exception_DienThoai(strDienThoai, commnd);
                 error.Exception_DiaChiMail(strMail, commnd);
                 error.Exception_TienNo(strTienNo, commnd);
-                string sqlstr = "INSERT INTO HoSo (MaSo, TenDaiLy, DienThoai, DiaChi, NgayTiepNhan, MaLoaiDaiLy, Email, TienNo, XacNhan) " +
-                                "VALUES ('" + strMaHoSo + "', '" + strTenDL + "', '" + strDienThoai + "', '" + strDiaChi + "', '" + sqtChuyenDoiNgayThang + "', '" + strMaDL + "', '" + strMail + "', '" + strTienNo + "', " + intXacNhan + ")";
+
+                string sqlstr = $"INSERT INTO HoSo (MaHoSo, TenDaiLy, DienThoai, DiaChi, NgayTiepNhan, MaLoaiDaiLy, Email, TienNo, XacNhan) VALUES ('{strMaHoSo}', '{strTenDL}', '{strDienThoai}', '{strDiaChi}', '{sqtChuyenDoiNgayThang}', '{strMaDL}', '{strMail}', '{strTienNo}', {intXacNhan})";
                 global.SQL_Database(sqlstr, sqlConn.sqlCNN);
             }
             catch
             {
                 MessageBox.Show(strMess.ThaoTacThatBai, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
+            
         }
+    
         private void button7_Click(object sender, EventArgs e)
         {
             string strMaHoSo = txtMaHS.Text.Trim();
-            string sqlstr = "UPDATE HoSo SET XacNhan = 1 WHERE MaSo='" + strMaHoSo + "'";
+            string sqlstr = "UPDATE HoSo SET XacNhan = 1 WHERE MaHoSo='" + strMaHoSo + "'";
             global.SQL_Database(sqlstr, sqlConn.sqlCNN);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
             string strMaHoSo = txtMaHS.Text.Trim();
-            string sqlstr = "UPDATE HoSo SET XacNhan = 0 WHERE MaSo='" + strMaHoSo + "'";
+            string sqlstr = "UPDATE HoSo SET XacNhan = 0 WHERE MaHoSo='" + strMaHoSo + "'";
             global.SQL_Database(sqlstr, sqlConn.sqlCNN);
         }
 
@@ -115,7 +117,7 @@ namespace QuanLyDaiLy
         {
             if (str == "Mã Hồ Sơ")
             {
-                strGetValue = "MaSo";
+                strGetValue = "MaHoSo";
             }
             if (str == "Tên Đại Lý")
             {
@@ -180,7 +182,7 @@ namespace QuanLyDaiLy
 
                 //Mã Hồ Sơ
                 DataGridTextBoxColumn grdColMaHoSo = new DataGridTextBoxColumn();
-                grdColMaHoSo.MappingName = "MaSo";
+                grdColMaHoSo.MappingName = "MaHoSo";
                 grdColMaHoSo.HeaderText = "Mã Hồ Sơ";
                 grdColMaHoSo.NullText = "";
                 grdColMaHoSo.Width = 80;
@@ -295,18 +297,19 @@ namespace QuanLyDaiLy
             string strDienThoai = txtDienThoai.Text.Trim();
             string strMail = txtDiaChiM.Text.Trim();
             string strTienNo = txtTienNo.Text.Trim();
-            string strNgayThang;
             int intXacNhan = 0;
+
             string sqtChuyenDoiNgayThang;
             if (dtpNgayTN.Checked)
             {
-                strNgayThang = dtpNgayTN.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtNgayTN = dtpNgayTN.Value;
+                sqtChuyenDoiNgayThang = dtNgayTN.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
+
             try
             {
                 error.Exception_MaHoSo_CN(strMaHoSo, commnd, sqlConn.sqlCNN);
@@ -315,7 +318,8 @@ namespace QuanLyDaiLy
                 error.Exception_DienThoai(strDienThoai, commnd);
                 error.Exception_DiaChiMail(strMail, commnd);
                 error.Exception_TienNo(strTienNo, commnd);
-                sqlstr = "update HoSo set TenDaiLy = N'" + strTenDL + "',DienThoai=N'" + strDienThoai + "',DiaChi=N'" + strDiaChi + "' ,NgayTiepNhan='" + sqtChuyenDoiNgayThang + "',MaLoaiDaiLy='" + strMaDL + "',Email='" + strMail + "',TienNo='" + strTienNo + "',XacNhan=" + intXacNhan + " where MaHoSo='" + strMaHoSo + "'";
+
+                string sqlstr = $"UPDATE HoSo SET TenDaiLy = '{strTenDL}', DienThoai = '{strDienThoai}', DiaChi = '{strDiaChi}', NgayTiepNhan = '{sqtChuyenDoiNgayThang}', MaLoaiDaiLy = '{strMaDL}', Email = '{strMail}', TienNo = '{strTienNo}', XacNhan = {intXacNhan} WHERE MaHoSo = '{strMaHoSo}'";
                 global.SQL_Database(sqlstr, sqlConn.sqlCNN);
             }
             catch
@@ -323,6 +327,7 @@ namespace QuanLyDaiLy
                 MessageBox.Show(strMess.ThaoTacThatBai, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

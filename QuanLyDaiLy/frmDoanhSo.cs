@@ -29,9 +29,9 @@ namespace QuanLyDaiLy
             try
             {
                 sqlConn.getConnectionString();
-                string sqlstr = "SELECT MaSo FROM HoSo ORDER BY MaSo";
-                string display = "MaSo";
-                string value = "MaSo";
+                string sqlstr = "SELECT MaHoSo FROM HoSo ORDER BY MaHoSo";
+                string display = "MaHoSo";
+                string value = "MaHoSo";
                 loadCombo.Load_LoaiDaiLy(sqlstr, display, value, comboMaHS, sqlConn.sqlCNN);
             }
             catch (Exception ex)
@@ -48,32 +48,32 @@ namespace QuanLyDaiLy
         private void button4_Click_1(object sender, EventArgs e)
         {
             comboMaHS.Text = "";
-            dateTimePicker1.Text = "";
+            dtpTG.Text = "";
             txtTongDS_DoanhSo.Text = "";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string strMaSo = comboMaHS.Text.Trim();
-            string strNgayThang;
+            string strMaHoSo = comboMaHS.Text.Trim();
             string sqtChuyenDoiNgayThang;
-            if (dateTimePicker1.Checked)
+            if (dtpTG.Checked)
             {
-                strNgayThang = dateTimePicker1.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtTG = dtpTG.Value;
+                sqtChuyenDoiNgayThang = dtTG.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
+
             string strTongDS = txtTongDS_DoanhSo.Text.Trim();
             if (strTongDS == "") strTongDS = "0";
 
             try
             {
-                error.Exception_MaHoSo(strMaSo, commnd, sqlConn.sqlCNN);
+                error.Exception_MaHoSo(strMaHoSo, commnd, sqlConn.sqlCNN);
                 error.Exception_TienNo(strTongDS, commnd);
-                string sqlstr = "Insert into DoanhSo values(N'" + strMaSo + "','" + sqtChuyenDoiNgayThang + "','" + strTongDS + "')";
+                string sqlstr = "INSERT INTO DoanhSo (MaHoSo, ThoiGian, TongDoanhSo) VALUES ('" + strMaHoSo + "', '" + sqtChuyenDoiNgayThang + "', '" + strTongDS + "')";
                 global.SQL_Database(sqlstr, sqlConn.sqlCNN);
             }
             catch (Exception ex)
@@ -82,47 +82,65 @@ namespace QuanLyDaiLy
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        /*private void button2_Click(object sender, EventArgs e)
         {
             string strMaHoSo = comboMaHS.Text.Trim();
             string strNgayThang;
             string sqtChuyenDoiNgayThang;
-            if (dateTimePicker1.Checked)
+            if (dtpTG.Checked)
             {
-                strNgayThang = dateTimePicker1.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtTG = dtpTG.Value;
+                sqtChuyenDoiNgayThang = dtTG.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = System.DateTime.Now.ToShortDateString();
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
+
             string strTongDS = txtTongDS_DoanhSo.Text.Trim();
 
             try
             {
                 error.Exception_TienNo(strTongDS, commnd);
-                string sqlstr = "update DoanhSo set ThoiGian = '" + sqtChuyenDoiNgayThang + "',TongDoanhSo='" + strTongDS + "' where MaHoSo='" + strMaHoSo + "'";
-                global.SQL_Database(sqlstr, sqlConn.sqlCNN);
+                //string sqlstr = "update DoanhSo set ThoiGian = '" + sqtChuyenDoiNgayThang + "',TongDoanhSo='" + strTongDS + "' where MaHoSo='" + strMaHoSo + "'";
+                string sqlstr = "UPDATE DoanhSo SET ";
+                List<string> updates = new List<string>();
+
+                if (!string.IsNullOrEmpty(sqtChuyenDoiNgayThang))
+                {
+                    updates.Add("ThoiGian = '" + sqtChuyenDoiNgayThang + "'");
+                }
+
+                if (!string.IsNullOrEmpty(strTongDS))
+                {
+                    updates.Add("TongDoanhSo = '" + strTongDS + "'");
+                }
+
+                if (updates.Count > 0)
+                {
+                    sqlstr += string.Join(", ", updates) + " WHERE MaHoSo = '" + strMaHoSo + "'";
+                    global.SQL_Database(sqlstr, sqlConn.sqlCNN);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-        }
+        }*/
 
         private void button1_Click(object sender, EventArgs e)
         {
             string strMaHoSo = comboMaHS.Text.Trim();
             try
             {
-                string strChuoiDieuKien = "MaSo='" + strMaHoSo + "'";
+                string strChuoiDieuKien = "MaHoSo='" + strMaHoSo + "'";
                 string strTableName = "DoanhSo";
                 if (global.Test_Database(strChuoiDieuKien, strTableName, sqlConn.sqlCNN) == false)
                 {
                     MessageBox.Show("Mã Loại Đại Lý Này Không Tồn Tại", strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     commnd.ExecuteNonQuery();
                 }
-                string sqlstr = "Delete From DoanhSo where MaSo ='" + strMaHoSo + "'";
+                string sqlstr = "Delete From DoanhSo where MaHoSo ='" + strMaHoSo + "'";
                 global.SQL_Database(sqlstr, sqlConn.sqlCNN);
             }
             catch (Exception ex)
@@ -148,7 +166,7 @@ namespace QuanLyDaiLy
         {
             if (str == "Mã Hồ Sơ")
             {
-                strGetValue = "MaSo";
+                strGetValue = "MaHoSo";
             }
             if (str == "Thời Gian")
             {
@@ -171,7 +189,7 @@ namespace QuanLyDaiLy
                 grdTableStyle = global.MyTableStyleCreate();
                 //Mã Hồ Sơ
                 DataGridTextBoxColumn grdColMaHoSo = new DataGridTextBoxColumn();
-                grdColMaHoSo.MappingName = "MaSo";
+                grdColMaHoSo.MappingName = "MaHoSo";
                 grdColMaHoSo.HeaderText = "Mã Hồ Sơ";
                 grdColMaHoSo.NullText = "";
                 grdColMaHoSo.Width = 80;
@@ -204,8 +222,8 @@ namespace QuanLyDaiLy
 
         private void setControll(DataTable dtTable, int Index)
         {
-            comboMaHS.Text = dtTable.Rows[Index]["MaSo"].ToString();
-            dateTimePicker1.Text = dtTable.Rows[Index]["ThoiGian"].ToString();
+            comboMaHS.Text = dtTable.Rows[Index]["MaHoSo"].ToString();
+            dtpTG.Text = dtTable.Rows[Index]["ThoiGian"].ToString();
             txtTongDS_DoanhSo.Text = dtTable.Rows[Index]["TongDoanhSo"].ToString();
         }
 

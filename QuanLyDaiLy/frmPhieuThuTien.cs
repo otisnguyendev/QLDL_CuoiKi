@@ -29,9 +29,9 @@ namespace QuanLyDaiLy
             try
             {
                 sqlConn.getConnectionString();
-                string sqlstr = "SELECT MaSo FROM HoSo ORDER BY MaSo";
-                string display = "MaSo";
-                string value = "MaSo";
+                string sqlstr = "SELECT MaHoSo FROM HoSo ORDER BY MaHoSo";
+                string display = "MaHoSo";
+                string value = "MaHoSo";
                 loadCombo.Load_LoaiDaiLy(sqlstr, display, value, comboMaHS_PT, sqlConn.sqlCNN);
                 string sqlstr1 = "SELECT MaPhieuXuat FROM PhieuXuatHang ORDER BY MaPhieuXuat";
                 string value1 = "MaPhieuXuat";
@@ -67,12 +67,12 @@ namespace QuanLyDaiLy
             string sqtChuyenDoiNgayThang;
             if (dtpNgayTT_PT.Checked)
             {
-                strNgayThang = dtpNgayTT_PT.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtNgayTN = dtpNgayTT_PT.Value;
+                sqtChuyenDoiNgayThang = dtNgayTN.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = "";
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
             string strSoTienT = txtSoTienT_PT.Text.Trim();
             if (strSoTienT == "") strSoTienT = "0";
@@ -100,29 +100,96 @@ namespace QuanLyDaiLy
             string sqtChuyenDoiNgayThang;
             if (dtpNgayTT_PT.Checked)
             {
-                strNgayThang = dtpNgayTT_PT.Text.Trim();
-                sqtChuyenDoiNgayThang = global.Return_Time_ThangNgay(strNgayThang);
+                DateTime dtNgayTN = dtpNgayTT_PT.Value;
+                sqtChuyenDoiNgayThang = dtNgayTN.ToString("yyyy-MM-dd");
             }
             else
             {
-                sqtChuyenDoiNgayThang = "";
+                sqtChuyenDoiNgayThang = DateTime.Now.ToString("yyyy-MM-dd");
             }
             string strSoTienT = txtSoTienT_PT.Text.Trim();
             if (strSoTienT == "") strSoTienT = "0";
             string strGhiChu_PT = rtbGhiChu_PT.Text.Trim();
+
             try
             {
                 error.Exception_MaPhieuThu_CN(strMaPT, commnd, sqlConn.sqlCNN);
                 error.Exception_SoTienThu(strSoTienT, commnd);
                 error.Exception_GhiChu(strGhiChu_PT, commnd);
-                string sqlstr = "update PhieuThuTien set MaSo = N'" + strMaHS + "',MaPhieuXuat=N'" + strMaPX + "',NgayThuTien='" + sqtChuyenDoiNgayThang + "',SoTienThu=N'" + strSoTienT + "',GhiChu=N'" + strGhiChu_PT + "' where MaPhieuThu='" + strMaPT + "'";
-                global.SQL_Database(sqlstr, sqlConn.sqlCNN);
+
+                StringBuilder sqlBuilder = new StringBuilder("UPDATE PhieuThuTien SET ");
+                List<string> setClauses = new List<string>();
+
+                if (!string.IsNullOrEmpty(strMaHS))
+                {
+                    setClauses.Add("MaHoSo = @MaHoSo");
+                }
+                if (!string.IsNullOrEmpty(strMaPX))
+                {
+                    setClauses.Add("MaPhieuXuat = @MaPhieuXuat");
+                }
+                if (!string.IsNullOrEmpty(strSoTienT))
+                {
+                    setClauses.Add("SoTienThu = @SoTienThu");
+                }
+                if (!string.IsNullOrEmpty(strGhiChu_PT))
+                {
+                    setClauses.Add("GhiChu = @GhiChu");
+                }
+                if (dtpNgayTT_PT.Checked)
+                {
+                    setClauses.Add("NgayThuTien = @NgayThuTien");
+                }
+
+                if (setClauses.Count > 0)
+                {
+                    sqlBuilder.Append(string.Join(", ", setClauses));
+                    sqlBuilder.Append(" WHERE MaPhieuThu = @MaPhieuThu");
+
+                    string sqlstr = sqlBuilder.ToString();
+
+                    using (MySqlConnection conn = new MySqlConnection("Server=localhost;Database=dbcuoiky;Uid=root;Pwd=123456;"))
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(sqlstr, conn))
+                        {
+                            if (!string.IsNullOrEmpty(strMaHS))
+                            {
+                                cmd.Parameters.AddWithValue("@MaHoSo", strMaHS);
+                            }
+                            if (!string.IsNullOrEmpty(strMaPX))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhieuXuat", strMaPX);
+                            }
+                            if (!string.IsNullOrEmpty(strSoTienT))
+                            {
+                                cmd.Parameters.AddWithValue("@SoTienThu", strSoTienT);
+                            }
+                            if (!string.IsNullOrEmpty(strGhiChu_PT))
+                            {
+                                cmd.Parameters.AddWithValue("@GhiChu", strGhiChu_PT);
+                            }
+                            if (dtpNgayTT_PT.Checked)
+                            {
+                                cmd.Parameters.AddWithValue("@NgayThuTien", sqtChuyenDoiNgayThang);
+                            }
+                            cmd.Parameters.AddWithValue("@MaPhieuThu", strMaPT);
+
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không có dữ liệu nào để cập nhật.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show(strMess.ThaoTacThatBai, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(strMess.ThaoTacThatBai + ": " + ex.Message, strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -154,7 +221,7 @@ namespace QuanLyDaiLy
             }
             if (str == "Mã Hồ Sơ")
             {
-                strGetValue = "MaSo";
+                strGetValue = "MaHoSo";
             }
             if (str == "Mã Phiếu Xuất")
             {
@@ -192,7 +259,7 @@ namespace QuanLyDaiLy
 
                 //Mã Hồ Sơ
                 DataGridTextBoxColumn grdColMaHoSo = new DataGridTextBoxColumn();
-                grdColMaHoSo.MappingName = "MaSo";
+                grdColMaHoSo.MappingName = "MaHoSo";
                 grdColMaHoSo.HeaderText = "Mã Hồ Sơ";
                 grdColMaHoSo.NullText = "";
                 grdColMaHoSo.Width = 150;
@@ -254,7 +321,7 @@ namespace QuanLyDaiLy
         private void setControll(DataTable dtTable, int Index)
         {
             txtMaPT_PT.Text = dtTable.Rows[Index]["MaPhieuThu"].ToString();
-            comboMaHS_PT.Text = dtTable.Rows[Index]["MaSo"].ToString();
+            comboMaHS_PT.Text = dtTable.Rows[Index]["MaHoSo"].ToString();
             comboMaPX_PT.Text = dtTable.Rows[Index]["MaPhieuXuat"].ToString();
             dtpNgayTT_PT.Text = dtTable.Rows[Index]["NgayThuTien"].ToString();
             txtSoTienT_PT.Text = dtTable.Rows[Index]["SoTienTHu"].ToString();

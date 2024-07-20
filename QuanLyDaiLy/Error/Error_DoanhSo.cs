@@ -26,11 +26,11 @@ namespace QuanLyDaiLy.Error
             }
             string strChuoiDieuKien = "MaHoSo='" + str + "'";
             string strTableName = "DoanhSo";
-            if (global.Test_Database(strChuoiDieuKien, strTableName, sqlCNN))
+            /*if (global.Test_Database(strChuoiDieuKien, strTableName, sqlCNN))
             {
                 MessageBox.Show("Mã Hồ Sơ Này Đã Tồn Tại", strMess.TieuDe_Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 commn.ExecuteNonQuery();
-            }
+            }*/
         }
 
         public void Exception_TienNo(string str, MySqlCommand commn)

@@ -22,7 +22,7 @@ namespace QuanLyDaiLy.Modules
             MySqlDataReader sqlReader = sqlCmd.ExecuteReader();
 
             if (sqlReader.HasRows)
-                bolReturn = true; // Tồn tại mẫu tin == True            
+                bolReturn = true;        
 
             sqlReader.Dispose();
             sqlReader.Close();
